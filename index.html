@@ -3,22 +3,23 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>PAO → Risk of Conversion to Total Hip Arthroplasty Following Periacetabular Osteotomy (PAO) for hip Dysplasia</title>
+  <title>PAO → Risk of Conversion to Total Hip Arthroplasty Following Periacetabular Osteotomy (PAO) for Hip Dysplasia</title>
 
   <style>
     :root{
-      --bg0:#060a14;
-      --bg1:#0b1630;
+      --bg0:#1a0a0a;
+      --bg1:#2d1515;
       --card:rgba(255,255,255,.06);
       --card2:rgba(255,255,255,.08);
-      --stroke:rgba(255,255,255,.10);
+      --stroke:rgba(255,255,255,.12);
       --text:rgba(255,255,255,.92);
       --muted:rgba(255,255,255,.65);
       --muted2:rgba(255,255,255,.50);
-      --accent:#38bdf8;
-      --accent2:#22c55e;
-      --warn:#f59e0b;
-      --danger:#ef4444;
+      --accent:#c41e3a;
+      --accent-light:#e63950;
+      --accent2:#d4af37;
+      --warn:#d4af37;
+      --danger:#c41e3a;
       --shadow: 0 22px 70px rgba(0,0,0,.55);
       --r:22px;
     }
@@ -29,8 +30,8 @@
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       color:var(--text);
       background:
-        radial-gradient(1200px 600px at 20% -10%, rgba(56,189,248,.25), transparent 60%),
-        radial-gradient(900px 500px at 90% 10%, rgba(34,197,94,.18), transparent 55%),
+        radial-gradient(1200px 600px at 20% -10%, rgba(196,30,58,.20), transparent 60%),
+        radial-gradient(900px 500px at 90% 10%, rgba(212,175,55,.12), transparent 55%),
         linear-gradient(180deg, var(--bg0), var(--bg1));
       min-height:100vh;
       padding:48px 18px;
@@ -86,7 +87,7 @@
       letter-spacing:.01em;
     }
 
-    input, select{
+    input{
       width:100%;
       appearance:none;
       background: rgba(0,0,0,.28);
@@ -99,9 +100,55 @@
       transition: border-color .15s ease, transform .08s ease;
     }
 
-    input:focus, select:focus{
-      border-color: rgba(56,189,248,.65);
-      box-shadow: 0 0 0 4px rgba(56,189,248,.14);
+    input:focus{
+      border-color: rgba(196,30,58,.65);
+      box-shadow: 0 0 0 4px rgba(196,30,58,.14);
+    }
+
+    /* Clean dropdown styling */
+    .select-wrapper{
+      position:relative;
+    }
+    .select-wrapper::after{
+      content:"";
+      position:absolute;
+      right:16px;
+      top:50%;
+      transform:translateY(-50%);
+      width:0;
+      height:0;
+      border-left:5px solid transparent;
+      border-right:5px solid transparent;
+      border-top:6px solid rgba(255,255,255,.5);
+      pointer-events:none;
+    }
+    select{
+      width:100%;
+      appearance:none;
+      -webkit-appearance:none;
+      -moz-appearance:none;
+      background: rgba(0,0,0,.28);
+      border:1px solid rgba(255,255,255,.14);
+      color:var(--text);
+      padding:14px 40px 14px 14px;
+      border-radius:14px;
+      outline:none;
+      font-size:15px;
+      cursor:pointer;
+      transition: border-color .15s ease, background .15s ease;
+    }
+    select:hover{
+      background: rgba(0,0,0,.35);
+      border-color: rgba(255,255,255,.22);
+    }
+    select:focus{
+      border-color: rgba(196,30,58,.65);
+      box-shadow: 0 0 0 4px rgba(196,30,58,.14);
+    }
+    select option{
+      background: #2d1515;
+      color: var(--text);
+      padding: 10px;
     }
 
     .hint{
@@ -131,18 +178,18 @@
     }
 
     button{
-      border:1px solid rgba(56,189,248,.35);
-      background: linear-gradient(180deg, rgba(56,189,248,.95), rgba(56,189,248,.70));
-      color:#02121c;
+      border:1px solid rgba(196,30,58,.45);
+      background: linear-gradient(180deg, rgba(196,30,58,.95), rgba(156,24,46,.85));
+      color:#fff;
       font-weight:800;
       padding:14px 16px;
       border-radius:16px;
       cursor:pointer;
       width:100%;
       font-size:15px;
-      touch-action: manipulation; /* mobile-friendly */
+      touch-action: manipulation;
     }
-    button:hover{filter:brightness(1.03)}
+    button:hover{filter:brightness(1.08)}
     button:active{transform: translateY(1px)}
 
     .secondary{
@@ -170,17 +217,27 @@
       padding:18px;
       position:relative;
       overflow:hidden;
+      transition: opacity .3s ease, filter .3s ease;
     }
 
     .card:before{
       content:"";
       position:absolute; inset:-2px;
-      background: radial-gradient(500px 240px at 20% 0%, rgba(56,189,248,.10), transparent 55%),
-                  radial-gradient(500px 240px at 80% 0%, rgba(34,197,94,.08), transparent 60%);
+      background: radial-gradient(500px 240px at 20% 0%, rgba(196,30,58,.10), transparent 55%),
+                  radial-gradient(500px 240px at 80% 0%, rgba(212,175,55,.08), transparent 60%);
       pointer-events:none;
     }
 
     .card > *{ position:relative; }
+
+    .card.disabled{
+      opacity: 0.4;
+      filter: grayscale(0.6);
+      pointer-events: none;
+    }
+    .card.disabled .big{
+      color: var(--muted2);
+    }
 
     .kicker{
       color:var(--muted);
@@ -206,8 +263,8 @@
       color: var(--muted);
     }
     .tag.low{ color: rgba(34,197,94,.95); border-color: rgba(34,197,94,.25); background: rgba(34,197,94,.10); }
-    .tag.mod{ color: rgba(245,158,11,.95); border-color: rgba(245,158,11,.25); background: rgba(245,158,11,.10); }
-    .tag.high{ color: rgba(239,68,68,.95); border-color: rgba(239,68,68,.25); background: rgba(239,68,68,.10); }
+    .tag.mod{ color: rgba(212,175,55,.95); border-color: rgba(212,175,55,.25); background: rgba(212,175,55,.10); }
+    .tag.high{ color: rgba(196,30,58,.95); border-color: rgba(196,30,58,.25); background: rgba(196,30,58,.10); }
 
     .details{
       margin-top:10px;
@@ -220,19 +277,26 @@
       margin-top:14px;
       font-size:12px;
       color:var(--muted2);
+      line-height:1.5;
     }
 
     .mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; }
+
+    .na-notice{
+      font-size:13px;
+      color:var(--muted2);
+      font-style:italic;
+      margin-top:8px;
+    }
   </style>
 </head>
 
 <body>
   <div class="wrap">
     <div class="header">
-      <div class="title">Risk of Conversion to Total Hip Arthroplasty Following Periacetabular Osteotomy (PAO) for hip Dysplasia</div>
+      <div class="title">Risk of Conversion to Total Hip Arthroplasty Following Periacetabular Osteotomy (PAO) for Hip Dysplasia</div>
       <div class="subtitle">
         Logistic regression–based risk estimation at <b>5</b> and <b>10</b> years (research tool; not a validated clinical decision aid).
-        Obesity is defined as <b>BMI ≥ 30 kg/m²</b>.
       </div>
     </div>
 
@@ -248,12 +312,14 @@
 
         <div class="field">
           <label for="tonnis">Tönnis grade</label>
-          <select id="tonnis">
-            <option value="0">0 – No OA</option>
-            <option value="1">1 – Mild OA</option>
-            <option value="2">2 – Moderate OA</option>
-            <option value="3">3 – Severe OA</option>
-          </select>
+          <div class="select-wrapper">
+            <select id="tonnis">
+              <option value="0">0 – No OA</option>
+              <option value="1">1 – Mild OA</option>
+              <option value="2">2 – Moderate OA</option>
+              <option value="3">3 – Severe OA</option>
+            </select>
+          </div>
         </div>
 
         <div class="field">
@@ -270,20 +336,22 @@
 
         <div class="field">
           <label>BMI (kg/m²)</label>
-          <input id="bmi" type="text" readonly value="—" />
+          <input id="bmi" type="number" min="10" max="60" step="0.1" value="" placeholder="Auto-calculated or enter manually" />
           <div class="hint">
-            BMI is computed automatically from height and weight.
+            BMI is computed automatically from height and weight, or can be entered directly.
           </div>
           <div class="pill" id="obesityPill">Obesity (BMI ≥ 30): —</div>
         </div>
 
         <div class="field">
           <label for="ai13">Postoperative persistent hip dysplasia (acetabular index >13°)</label>
-          <select id="ai13">
-            <option value="0" selected>No</option>
-            <option value="1">Yes</option>
-          </select>
-          <div class="hint">Used only in the 5-year model (binary).</div>
+          <div class="select-wrapper">
+            <select id="ai13">
+              <option value="0" selected>No</option>
+              <option value="1">Yes</option>
+            </select>
+          </div>
+          <div class="hint">Used only in the 5-year model.</div>
         </div>
       </div>
 
@@ -297,7 +365,7 @@
       <h2>Results</h2>
 
       <div class="results">
-        <div class="card">
+        <div class="card" id="card5">
           <p class="kicker">Risk of THA ≤ 5 years</p>
           <p class="big" id="p5">—</p>
           <div class="tag" id="tag5">Not calculated</div>
@@ -306,19 +374,21 @@
           </div>
         </div>
 
-        <div class="card">
+        <div class="card" id="card10">
           <p class="kicker">Risk of THA ≤ 10 years</p>
           <p class="big" id="p10">—</p>
           <div class="tag" id="tag10">Not calculated</div>
           <div class="details" id="d10">
             Model (10y): <span class="mono">logit(p) = β0 + βAge·Age + βTönnis·Tönnis + βObesity·(BMI≥30)</span>
           </div>
+          <div class="na-notice" id="na10" style="display:none;">
+            Not applicable when postoperative dysplasia is present.
+          </div>
         </div>
       </div>
 
       <div class="footer-note">
-        This risk calculation is based on research data from the Department of Orthopaedic Surgery at Inselspital, Bern, Switzerland, including long-term follow-up of patients treated with periacetabular osteotomy (PAO) for hip dysplasia. PAO was originally developed at this institution in 1984. Consequently, the underlying dataset includes heterogeneous cases spanning the early learning curve as well as contemporary surgical techniques, and represents one of the longest available follow-up periods worldwide. This model is only applicable to patients with developmental hip dysplasia treated with PAO. Risk estimation is not valid for other hip pathologies such as acetabular retroversion. 
-No warranty is given regarding the accuracy, completeness, or applicability of the calculated results. The authors and the hosting institution accept no liability for clinical decisions, treatments, or outcomes based on the use of this tool. This page does not store or transmit data (runs locally in your browser).
+        <b>Obesity</b> is defined as BMI ≥ 30 kg/m². This risk calculation is based on research data from the Department of Orthopaedic Surgery at Inselspital, Bern, Switzerland, including long-term follow-up of patients treated with periacetabular osteotomy (PAO) for hip dysplasia. PAO was originally developed at this institution in 1984. Consequently, the underlying dataset includes heterogeneous cases spanning the early learning curve as well as contemporary surgical techniques, and represents one of the longest available follow-up periods worldwide. This model is only applicable to patients with developmental hip dysplasia treated with PAO. Risk estimation is not valid for other hip pathologies such as acetabular retroversion. No warranty is given regarding the accuracy, completeness, or applicability of the calculated results. The authors and the hosting institution accept no liability for clinical decisions, treatments, or outcomes based on the use of this tool. This page does not store or transmit data (runs locally in your browser).
       </div>
     </div>
   </div>
@@ -347,7 +417,7 @@ No warranty is given regarding the accuracy, completeness, or applicability of t
     }
 
     function fmtPct(p){
-      return (p*100).toFixed(2) + "%";
+      return (p*100).toFixed(1) + "%";
     }
 
     function riskTag(p){
@@ -362,28 +432,58 @@ No warranty is given regarding the accuracy, completeness, or applicability of t
       const wKg = parseFloat(document.getElementById("weight").value);
 
       if (Number.isNaN(hCm) || Number.isNaN(wKg) || hCm <= 0 || wKg <= 0) {
-        document.getElementById("bmi").value = "—";
         return NaN;
       }
 
       const hM = hCm / 100;
       const bmi = wKg / (hM * hM);
-
-      document.getElementById("bmi").value = bmi.toFixed(1);
       return bmi;
     }
 
+    function getBmi(){
+      const bmiField = document.getElementById("bmi");
+      const manualBmi = parseFloat(bmiField.value);
+      
+      // If manually entered and valid, use that
+      if (!Number.isNaN(manualBmi) && manualBmi >= 10 && manualBmi <= 60) {
+        return manualBmi;
+      }
+      
+      // Otherwise compute from height/weight
+      const computedBmi = computeBmiFromHeightWeight();
+      if (!Number.isNaN(computedBmi)) {
+        bmiField.value = computedBmi.toFixed(1);
+        return computedBmi;
+      }
+      
+      return NaN;
+    }
+
     function updateObesityPill(){
-      const bmi = computeBmiFromHeightWeight();
+      const bmi = getBmi();
       const obese = !Number.isNaN(bmi) && bmi >= 30;
 
       const pill = document.getElementById("obesityPill");
       pill.textContent = `Obesity (BMI ≥ 30): ${Number.isNaN(bmi) ? "—" : (obese ? "Yes" : "No")}`;
-      pill.style.borderColor = obese ? "rgba(245,158,11,.30)" : "rgba(255,255,255,.14)";
-      pill.style.background   = obese ? "rgba(245,158,11,.12)" : "rgba(255,255,255,.06)";
-      pill.style.color        = obese ? "rgba(245,158,11,.95)" : "rgba(255,255,255,.65)";
+      pill.style.borderColor = obese ? "rgba(212,175,55,.30)" : "rgba(255,255,255,.14)";
+      pill.style.background   = obese ? "rgba(212,175,55,.12)" : "rgba(255,255,255,.06)";
+      pill.style.color        = obese ? "rgba(212,175,55,.95)" : "rgba(255,255,255,.65)";
 
       return obese ? 1 : 0;
+    }
+
+    function updateCard10State(){
+      const ai13 = parseInt(document.getElementById("ai13").value, 10) || 0;
+      const card10 = document.getElementById("card10");
+      const na10 = document.getElementById("na10");
+      
+      if (ai13 === 1) {
+        card10.classList.add("disabled");
+        na10.style.display = "block";
+      } else {
+        card10.classList.remove("disabled");
+        na10.style.display = "none";
+      }
     }
 
     function calculate(){
@@ -396,6 +496,7 @@ No warranty is given regarding the accuracy, completeness, or applicability of t
       document.getElementById("age").value = age;
 
       const obesity = updateObesityPill();
+      updateCard10State();
 
       // 5y
       const z5 =
@@ -406,37 +507,46 @@ No warranty is given regarding the accuracy, completeness, or applicability of t
 
       const p5 = logistic(z5);
 
-      // 10y
-      const z10 =
-        COEF.y10.b0 +
-        COEF.y10.bAge * age +
-        COEF.y10.bTonnis * tonnis +
-        COEF.y10.bObesity * obesity;
-
-      const p10 = logistic(z10);
-
-      // UI
+      // UI for 5y
       document.getElementById("p5").textContent = fmtPct(p5);
-      document.getElementById("p10").textContent = fmtPct(p10);
 
       const t5 = riskTag(p5);
-      const t10 = riskTag(p10);
-
       const tag5 = document.getElementById("tag5");
       tag5.className = "tag " + t5.cls;
       tag5.textContent = t5.txt;
-
-      const tag10 = document.getElementById("tag10");
-      tag10.className = "tag " + t10.cls;
-      tag10.textContent = t10.txt;
 
       document.getElementById("d5").innerHTML =
         `Model (5y): <span class="mono">logit(p) = β0 + βAge·Age + βTönnis·Tönnis + βAI13·(AI≥13)</span><br>` +
         `<span class="mono">logit = ${z5.toFixed(4)} → p = ${fmtPct(p5)}</span>`;
 
-      document.getElementById("d10").innerHTML =
-        `Model (10y): <span class="mono">logit(p) = β0 + βAge·Age + βTönnis·Tönnis + βObesity·(BMI≥30)</span><br>` +
-        `<span class="mono">logit = ${z10.toFixed(4)} → p = ${fmtPct(p10)}</span>`;
+      // 10y - only calculate if ai13 is No
+      if (ai13 === 0) {
+        const z10 =
+          COEF.y10.b0 +
+          COEF.y10.bAge * age +
+          COEF.y10.bTonnis * tonnis +
+          COEF.y10.bObesity * obesity;
+
+        const p10 = logistic(z10);
+
+        document.getElementById("p10").textContent = fmtPct(p10);
+
+        const t10 = riskTag(p10);
+        const tag10 = document.getElementById("tag10");
+        tag10.className = "tag " + t10.cls;
+        tag10.textContent = t10.txt;
+
+        document.getElementById("d10").innerHTML =
+          `Model (10y): <span class="mono">logit(p) = β0 + βAge·Age + βTönnis·Tönnis + βObesity·(BMI≥30)</span><br>` +
+          `<span class="mono">logit = ${z10.toFixed(4)} → p = ${fmtPct(p10)}</span>`;
+      } else {
+        document.getElementById("p10").textContent = "N/A";
+        const tag10 = document.getElementById("tag10");
+        tag10.className = "tag";
+        tag10.textContent = "Not applicable";
+        document.getElementById("d10").innerHTML =
+          `Model (10y): <span class="mono">logit(p) = β0 + βAge·Age + βTönnis·Tönnis + βObesity·(BMI≥30)</span>`;
+      }
     }
 
     function resetAll(){
@@ -444,9 +554,10 @@ No warranty is given regarding the accuracy, completeness, or applicability of t
       document.getElementById("tonnis").value = "0";
       document.getElementById("height").value = 170;
       document.getElementById("weight").value = 60;
-      document.getElementById("bmi").value = "—";
+      document.getElementById("bmi").value = "";
       document.getElementById("ai13").value = "0";
       updateObesityPill();
+      updateCard10State();
 
       document.getElementById("p5").textContent = "—";
       document.getElementById("p10").textContent = "—";
@@ -472,11 +583,31 @@ No warranty is given regarding the accuracy, completeness, or applicability of t
       const btnReset = document.getElementById("btnReset");
       const height = document.getElementById("height");
       const weight = document.getElementById("weight");
+      const bmiField = document.getElementById("bmi");
+      const ai13Field = document.getElementById("ai13");
 
       ["input","change"].forEach(evt=>{
-        height.addEventListener(evt, updateObesityPill);
-        weight.addEventListener(evt, updateObesityPill);
+        height.addEventListener(evt, () => {
+          // Clear manual BMI when height changes to trigger recalc
+          const computed = computeBmiFromHeightWeight();
+          if (!Number.isNaN(computed)) {
+            bmiField.value = computed.toFixed(1);
+          }
+          updateObesityPill();
+        });
+        weight.addEventListener(evt, () => {
+          const computed = computeBmiFromHeightWeight();
+          if (!Number.isNaN(computed)) {
+            bmiField.value = computed.toFixed(1);
+          }
+          updateObesityPill();
+        });
       });
+
+      bmiField.addEventListener("input", updateObesityPill);
+      bmiField.addEventListener("change", updateObesityPill);
+
+      ai13Field.addEventListener("change", updateCard10State);
 
       function runCalc(e){
         if (e) e.preventDefault();
@@ -498,6 +629,7 @@ No warranty is given regarding the accuracy, completeness, or applicability of t
 
       // init
       updateObesityPill();
+      updateCard10State();
     })();
   </script>
 </body>
